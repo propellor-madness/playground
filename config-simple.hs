@@ -23,7 +23,7 @@ main = defaultMain hosts
 -- Edit this to configure propellor!
 hosts :: [Host]
 hosts =
-	[ host "mybox.example.com"
+	[ host "ubuntu-propellor"
 		& os (System (Debian Unstable) "amd64")
 		& Apt.stdSourcesList
 		& Apt.unattendedUpgrades
@@ -35,14 +35,6 @@ hosts =
 		& Docker.docked hosts "webserver"
 		& Docker.garbageCollected `period` Daily
 		& Cron.runPropellor "30 * * * *"
-
-	-- A generic webserver in a Docker container.
-	, Docker.container "webserver" "joeyh/debian-stable"
-		& os (System (Debian Stable) "amd64")
-		& Apt.stdSourcesList
-		& Docker.publish "80:80"
-		& Docker.volume "/var/www:/var/www"
-		& Apt.serviceInstalledRunning "apache2"
 
 	-- add more hosts here...
 	--, host "foo.example.com" = ...
