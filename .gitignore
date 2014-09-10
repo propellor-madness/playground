@@ -1,4 +1,12 @@
-dist
+dist/*
+propellor
+tags
+privdata/local
+privdata/keyring.gpg~
+Setup
+Setup.hi
+Setup.o
+docker
 cabal-dev
 *.o
 *.hi
